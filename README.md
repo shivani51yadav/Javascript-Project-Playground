@@ -1,3 +1,5 @@
+![Poster](./Docs/javascript_banner_sxve2l.jpg)
+
 # Javascript Projects Playground 🚀
 
 ## Project Name: Javascript Projects Playground
