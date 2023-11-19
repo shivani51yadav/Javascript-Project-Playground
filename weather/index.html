@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="card">
+        <div class="search">
+            <input type="text" placeholder="enter city name" spellcheck="false" >
+            <button><img src="images/search.png" ></button>
+        </div>
+
+        <div class="weather">
+            <img src="./images/rain.png" class="weather-icon">
+            <h1 class="temp">22°C</h1> 
+            <h2 class="city">New York</h2>  
+            <div class="details">
+                <div class="col">
+                    <img src="./images/humidity.png" alt="">
+                    <div>
+                        <p class="humidity">50%</p>
+                        <p>Humidity</p>
+                    </div>
+                </div>
+                <div class="col">
+                    <img src="./images/wind.png" alt="">
+                    <div>
+                        <p class="wind">15 km/h</p>
+                        <p>Wind Speed</p>
+                    </div>
+                </div>
+            </div> 
+        </div>
+    </div>
+
+
+    <!-- script -->
+
+    <script>
+        const searchBox=document.querySelector('.search input');    
+        const searchBtn=document.querySelector('.search button');
+        getWeatherReport('New York');
+
+
+        async function getWeatherReport(city){
+            const url=`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=0c9b0b0b0b0b0b0b0b0b0b0b0b0b0b0b&units=metric`;
+            const response=await fetch(url);
+            const data=await response.json();
+             console.log(data);
+            /* showWeatherReport(data);*/
+            document.querySelector('.city').innerHTML='data.name';
+            document.querySelector('.temp').innerHTML=`${data.main.temp}<span>°C</span>`;
+            document.querySelector('.humidity').innerHTML=`${data.main.humidity}%`;
+            document.querySelector('.wind').innerHTML=`${data.wind.speed}km/h`;
+               
+
+        }
+
+
+        searchBtn.addEventListener('click',()=>{
+            // console.log(searchBox.value);
+            // console.log(searchBox.value.trim());
+            // console.log(searchBox.value.trim().length);
+            if(searchBox.value.trim().length>0){
+                // console.log('search');
+                getWeatherReport(searchBox.value);
+            }else{
+                alert('Please enter a city name');
+            }
+            
+        });
+
+        getWeatherReport('New York');
+    </script>
+</body>
+</html>
